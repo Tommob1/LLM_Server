@@ -6,14 +6,15 @@ def send_request():
     headers = {"Content-Type": "application/json"}
     data = {
         "messages": [
-            {"role": "system", "content": "You are a helpful coding assistant."},
-            {"role": "user", "content": "How do I init and update a git submodule?"}
+            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "user", "content": "This is a test message, please respond with what LLM you are."}
         ],
         "temperature": 0.7,
         "max_tokens": 150,
         "stream": True
     }
     try:
+        message_buffer = ""
         with requests.post(url, headers=headers, json=data, stream=True) as response:
             response.raise_for_status()  # This will raise an exception for HTTP errors
             for line in response.iter_lines():
@@ -21,7 +22,12 @@ def send_request():
                     decoded_line = line.decode('utf-8')
                     if decoded_line.startswith('data:'):
                         json_str = decoded_line[5:]  # Remove 'data:' prefix
-                        process_response(json_str)
+                        message_part = process_response(json_str)
+                        if message_part:
+                            message_buffer += message_part + " "
+                            if message_part.endswith('.'):
+                                print(message_buffer.strip())
+                                message_buffer = ""
     except requests.exceptions.HTTPError as errh:
         print("HTTP Error:", errh)
     except requests.exceptions.ConnectionError as errc:
@@ -35,11 +41,11 @@ def process_response(json_str):
     try:
         data = json.loads(json_str)
         if 'choices' in data and data['choices']:
-            for choice in data['choices']:
-                if 'delta' in choice and 'content' in choice['delta']:
-                    print(choice['delta']['content'])
+            content = [choice['delta']['content'] for choice in data['choices'] if 'delta' in choice and 'content' in choice['delta']]
+            return ' '.join(content)
     except json.JSONDecodeError:
         print("Failed to decode JSON:", json_str)
+        return None
 
 if __name__ == "__main__":
     send_request()
