@@ -13,15 +13,17 @@ def send_request():
         "max_tokens": 150,
         "stream": True
     }
+    message_buffer = ""
     try:
-        message_buffer = ""
         with requests.post(url, headers=headers, json=data, stream=True) as response:
             response.raise_for_status()
             for line in response.iter_lines():
                 if line:
-                    decoded_line = line.decode('utf-8')
+                    decoded_line = line.decode('utf-8').strip()
                     if decoded_line.startswith('data:'):
-                        json_str = decoded_line[5:]
+                        json_str = decoded_line[5:].strip()
+                        if json_str == "[DONE]":
+                            break
                         message_part = process_response(json_str)
                         if message_part:
                             message_buffer += message_part + " "
@@ -42,7 +44,7 @@ def process_response(json_str):
         data = json.loads(json_str)
         if 'choices' in data and data['choices']:
             content = [choice['delta']['content'] for choice in data['choices'] if 'delta' in choice and 'content' in choice['delta']]
-            return ' '.join(content)
+            return ' '.join(content).replace("  ", " ")
     except json.JSONDecodeError:
         print("Failed to decode JSON:", json_str)
         return None
