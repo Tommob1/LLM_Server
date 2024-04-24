@@ -16,12 +16,12 @@ def send_request():
     try:
         message_buffer = ""
         with requests.post(url, headers=headers, json=data, stream=True) as response:
-            response.raise_for_status()  # This will raise an exception for HTTP errors
+            response.raise_for_status()
             for line in response.iter_lines():
                 if line:
                     decoded_line = line.decode('utf-8')
                     if decoded_line.startswith('data:'):
-                        json_str = decoded_line[5:]  # Remove 'data:' prefix
+                        json_str = decoded_line[5:]
                         message_part = process_response(json_str)
                         if message_part:
                             message_buffer += message_part + " "
