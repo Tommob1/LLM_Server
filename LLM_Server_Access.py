@@ -6,10 +6,9 @@ def send_request():
     url = "http://localhost:1234/v1/chat/completions"
     headers = {"Content-Type": "application/json"}
 
-    while True:
-        print("Please enter your prompt (type 'QUIT' to exit)")
-        user_input = input("USER: ")
-        if user_input.strip().upper() == "QUIT":
+    while True:  # Keep running until the user decides to quit
+        user_input = input("Please enter your question (type 'QUIT' to exit): ")
+        if user_input.strip().upper() == "QUIT":  # Check if the user wants to quit
             print("Exiting program.")
             sys.exit(0)
 
@@ -30,17 +29,17 @@ def send_request():
                     if line:
                         decoded_line = line.decode('utf-8').strip()
                         if decoded_line.startswith('data:'):
-                            json_str = decoded_line[5:].strip()
+                            json_str = decoded_line[5:].strip()  # Extract JSON data
                             if json_str == "[DONE]":
                                 if message_buffer.strip():
-                                    print(message_buffer.strip())
+                                    print_color(message_buffer.strip(), color='green')  # Print remaining text in green
                                 print("Stream ended by server.")
                                 break
                             message_part = process_response(json_str)
                             if message_part:
                                 message_buffer += (' ' if message_buffer and not message_buffer.endswith(' ') else '') + message_part
                                 if any(message_part.endswith(punc) for punc in '.?!'):
-                                    print(message_buffer.strip())
+                                    print_color(message_buffer.strip(), color='green')
                                     message_buffer = ""
         except requests.exceptions.HTTPError as errh:
             print("HTTP Error:", errh)
@@ -50,6 +49,14 @@ def send_request():
             print("Timeout Error:", errt)
         except requests.exceptions.RequestException as err:
             print("Oops: Something Else", err)
+
+def print_color(text, color):
+    """Print `text` in the color specified by `color`."""
+    color_codes = {
+        'green': '\033[92m',  # Green text
+        'end': '\033[0m',    # Reset to default text
+    }
+    print(f"{color_codes[color]}{text}{color_codes['end']}")
 
 def process_response(json_str):
     try:
