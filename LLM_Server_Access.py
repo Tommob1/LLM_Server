@@ -5,9 +5,10 @@ import sys
 def send_request():
     url = "http://localhost:1234/v1/chat/completions"
     headers = {"Content-Type": "application/json"}
+    print("Please enter your question (type 'QUIT' to exit)")
 
     while True:
-        user_input = input("Please enter your question (type 'QUIT' to exit): ")
+        user_input = input("USER: ")
         if user_input.strip().upper() == "QUIT":
             print("Exiting program.")
             sys.exit(0)
