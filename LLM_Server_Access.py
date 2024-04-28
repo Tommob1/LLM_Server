@@ -2,7 +2,7 @@ import requests
 import json
 import sys
 
-def send_request():
+def send_request(event=None):
     url = "http://localhost:1234/v1/chat/completions"
     headers = {"Content-Type": "application/json"}
 
