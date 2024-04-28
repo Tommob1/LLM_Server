@@ -68,5 +68,10 @@ def process_response(json_str):
         print("Failed to decode JSON:", json_str)
         return None
 
+def query_server(message):
+    response = send_request(message)
+    return response
+
+
 if __name__ == "__main__":
     send_request()
