@@ -8,7 +8,7 @@ def send():
     if user_input:
         response = query_server(user_input)
         output_text.configure(state='normal')
-        output_text.insert(tk.END, f"USER: {user_input}\nAI: {response}\n\n")
+        output_text.insert(tk.END, f"USER: {user_input}\n\nNEURON: {response}\n\n")
         output_text.configure(state='disabled')
         input_text.delete("1.0", tk.END)
     else:
