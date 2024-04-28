@@ -6,7 +6,7 @@ def send_request(user_input):
     headers = {"Content-Type": "application/json"}
     data = {
         "messages": [
-            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "system", "content": "You are a helpful AI assistant named NEURON."},
             {"role": "user", "content": user_input}
         ],
         "temperature": 0.7,
