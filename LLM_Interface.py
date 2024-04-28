@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import scrolledtext
 from tkinter import messagebox
-import LLM_Server_Access
+from LLM_Server_Access import query_server
 
 def send():
     user_input = input_text.get("1.0", tk.END).strip()
@@ -17,3 +17,17 @@ def send():
     else:
         messagebox.showinfo("Info", "Enter text.")
 
+app = tk.Tk()
+app.title("LLM Interface")
+
+input_text = scrolledtext.ScrolledText(app, height=3, width=50)
+input_text.pack(pady=10)
+
+output_text = scrolledtext.ScrolledText(app, height=15, width=50)
+output_text.pack(pady=10)
+output_text.configure(state='disabled')
+
+send_button = tk.Button(app, text="Send", command=send)
+send_button.pack(pady=10)
+
+app.mainloop()
