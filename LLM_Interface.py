@@ -6,14 +6,11 @@ from LLM_Server_Access import query_server
 def send():
     user_input = input_text.get("1.0", tk.END).strip()
     if user_input:
-        try:
-            response = query_server(user_input)
-            output_text.configure(state='normal')
-            output_text.insert(tk.END, f"USER: {user_input}\nAI: {response}\n\n")
-            output_text.configure(state='disabled')
-            input_text.delete("1.0", tk.END)
-        except Exception as e:
-            messagebox.showerror("Error", str(e))
+        response = query_server(user_input)
+        output_text.configure(state='normal')
+        output_text.insert(tk.END, f"USER: {user_input}\nAI: {response}\n\n")
+        output_text.configure(state='disabled')
+        input_text.delete("1.0", tk.END)
     else:
         messagebox.showinfo("Info", "Please enter some text to send.")
 
