@@ -21,18 +21,31 @@ def on_enter_key(event):
 
 app = tk.Tk()
 app.title("LLM Interface")
+app.geometry("400x400")  # Keep the window size consistent
 
-input_text = scrolledtext.ScrolledText(app, height=3, width=50)
-input_text.pack(pady=10)
+# Styling
+background_color = "#333"
+text_color = "#EEE"
+button_color = "#555"
+font_style = ("Arial", 12)
+
+app.configure(bg=background_color)
+
+# Input Text Box
+input_text = scrolledtext.ScrolledText(app, height=3, width=50, font=font_style, bg=background_color, fg=text_color)
+input_text.pack(pady=10, padx=10)
 input_text.bind("<Return>", on_enter_key)
 
-output_text = scrolledtext.ScrolledText(app, height=15, width=50)
-output_text.pack(pady=10)
+# Output Text Box
+output_text = scrolledtext.ScrolledText(app, height=15, width=50, font=font_style, bg=background_color, fg=text_color)
+output_text.pack(pady=10, padx=10)
 output_text.configure(state='disabled')
 
-output_text.tag_config('green_text', foreground='green')
+output_text.tag_config('user_text', foreground="#FF6347")  # Tomato
+output_text.tag_config('green_text', foreground="#90EE90")  # Light green
 
-send_button = tk.Button(app, text="Send", command=send)
-send_button.pack(pady=10)
+# Send Button
+send_button = tk.Button(app, text="Send", command=send, font=font_style, bg=button_color, fg=text_color)
+send_button.pack(pady=10, padx=10)
 
 app.mainloop()
