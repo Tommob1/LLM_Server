@@ -26,16 +26,19 @@ app.geometry("400x400")  # Consistent window size
 background_color = "#333"
 text_color = "#EEE"
 button_color = "#555"
+border_color = "#444"  # Slightly lighter than the background for a subtle outline
 font_style = ("Arial", 12)
 app.configure(bg=background_color)
 
 # Input Text Box
-input_text = Text(app, height=3, width=50, font=font_style, bg=background_color, fg=text_color, wrap=tk.WORD)
+input_text = Text(app, height=3, width=50, font=font_style, bg=background_color, fg=text_color, wrap=tk.WORD,
+                  borderwidth=1, relief="solid", highlightbackground=border_color, highlightthickness=1)
 input_text.pack(pady=10, padx=10)
 input_text.bind("<Return>", on_enter_key)
 
 # Output Text Box
-output_text = Text(app, height=15, width=50, font=font_style, bg=background_color, fg=text_color, wrap=tk.WORD)
+output_text = Text(app, height=15, width=50, font=font_style, bg=background_color, fg=text_color, wrap=tk.WORD,
+                   borderwidth=1, relief="solid", highlightbackground=border_color, highlightthickness=1)
 output_text.pack(pady=10, padx=10)
 output_text.configure(state='disabled')
 
