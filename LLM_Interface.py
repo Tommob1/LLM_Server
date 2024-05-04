@@ -17,14 +17,14 @@ def send():
 
 def on_enter_key(event):
     send()
-    return 'break'  # This prevents the default behavior of the Enter key which is to insert a newline
+    return 'break'
 
 app = tk.Tk()
 app.title("LLM Interface")
 
 input_text = scrolledtext.ScrolledText(app, height=3, width=50)
 input_text.pack(pady=10)
-input_text.bind("<Return>", on_enter_key)  # Bind the Enter key to the on_enter_key function
+input_text.bind("<Return>", on_enter_key)
 
 output_text = scrolledtext.ScrolledText(app, height=15, width=50)
 output_text.pack(pady=10)
