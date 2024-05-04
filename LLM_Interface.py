@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import scrolledtext, messagebox
-from tkinter.ttk import Scrollbar, Style  # Import the Style class
+from tkinter.ttk import Scrollbar, Style  # Make sure to use ttk's Scrollbar for better style support
 from LLM_Server_Access import query_server
 
 def send():
@@ -32,20 +32,34 @@ font_style = ("Arial", 12)
 
 app.configure(bg=background_color)
 
-# Style configuration for scrollbars
+# Style configuration for ttk scrollbars
 style = Style()
-style.theme_use('default')
-style.configure("TScrollbar", background=scrollbar_color, troughcolor=background_color, relief='flat')
+style.theme_use('default')  # Ensure default theme is active to apply custom style
+style.configure("Vertical.TScrollbar", gripcount=0,
+                background=scrollbar_color, darkcolor=scrollbar_color, lightcolor=scrollbar_color,
+                troughcolor=background_color, bordercolor=background_color, arrowcolor=text_color)
 
 # Input Text Box
 input_text = scrolledtext.ScrolledText(app, height=3, width=50, font=font_style, bg=background_color, fg=text_color)
 input_text.pack(pady=10, padx=10)
 input_text.bind("<Return>", on_enter_key)
 
+# Custom ttk Scrollbar for input_text
+input_scrollbar = Scrollbar(app, orient="vertical", style="Vertical.TScrollbar")
+input_scrollbar.pack(side="right", fill="y")
+input_scrollbar.config(command=input_text.yview)
+input_text.config(yscrollcommand=input_scrollbar.set)
+
 # Output Text Box
 output_text = scrolledtext.ScrolledText(app, height=15, width=50, font=font_style, bg=background_color, fg=text_color)
 output_text.pack(pady=10, padx=10)
 output_text.configure(state='disabled')
+
+# Custom ttk Scrollbar for output_text
+output_scrollbar = Scrollbar(app, orient="vertical", style="Vertical.TScrollbar")
+output_scrollbar.pack(side="right", fill="y")
+output_scrollbar.config(command=output_text.yview)
+output_text.config(yscrollcommand=output_scrollbar.set)
 
 output_text.tag_config('user_text', foreground="#FF6347")  # Tomato
 output_text.tag_config('green_text', foreground="#90EE90")  # Light green
