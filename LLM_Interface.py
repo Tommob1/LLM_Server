@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import scrolledtext, messagebox
+from tkinter import Text, messagebox
 from LLM_Server_Access import query_server
 
 def send():
@@ -16,11 +16,11 @@ def send():
 
 def on_enter_key(event):
     send()
-    return 'break'  # This prevents the default behavior of the Enter key which is to insert a newline.
+    return 'break'  # Prevents the default Enter key behavior (newline)
 
 app = tk.Tk()
 app.title("LLM Interface")
-app.geometry("400x400")  # Keep the window size consistent
+app.geometry("400x400")  # Consistent window size
 
 # Styling
 background_color = "#333"
@@ -30,12 +30,12 @@ font_style = ("Arial", 12)
 app.configure(bg=background_color)
 
 # Input Text Box
-input_text = scrolledtext.ScrolledText(app, height=3, width=50, font=font_style, bg=background_color, fg=text_color, wrap=tk.WORD)
+input_text = Text(app, height=3, width=50, font=font_style, bg=background_color, fg=text_color, wrap=tk.WORD)
 input_text.pack(pady=10, padx=10)
 input_text.bind("<Return>", on_enter_key)
 
 # Output Text Box
-output_text = scrolledtext.ScrolledText(app, height=15, width=50, font=font_style, bg=background_color, fg=text_color, wrap=tk.WORD)
+output_text = Text(app, height=15, width=50, font=font_style, bg=background_color, fg=text_color, wrap=tk.WORD)
 output_text.pack(pady=10, padx=10)
 output_text.configure(state='disabled')
 
