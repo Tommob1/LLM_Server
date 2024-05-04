@@ -1,6 +1,6 @@
 import tkinter as tk
-from tkinter import scrolledtext
-from tkinter import messagebox
+from tkinter import scrolledtext, messagebox
+from tkinter.ttk import Scrollbar, Style  # Import the Style class
 from LLM_Server_Access import query_server
 
 def send():
@@ -27,9 +27,15 @@ app.geometry("400x400")  # Keep the window size consistent
 background_color = "#333"
 text_color = "#EEE"
 button_color = "#555"
+scrollbar_color = "#666"  # Dark grey color for scrollbars
 font_style = ("Arial", 12)
 
 app.configure(bg=background_color)
+
+# Style configuration for scrollbars
+style = Style()
+style.theme_use('default')
+style.configure("TScrollbar", background=scrollbar_color, troughcolor=background_color, relief='flat')
 
 # Input Text Box
 input_text = scrolledtext.ScrolledText(app, height=3, width=50, font=font_style, bg=background_color, fg=text_color)
