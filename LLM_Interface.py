@@ -40,7 +40,7 @@ output_text.pack(pady=10, padx=10)
 output_text.configure(state='disabled')
 
 output_text.tag_config('user_text', foreground="#FF6347")
-output_text.tag_config('green_text', foreground="#90EE90")
+output_text.tag_config('green_text', foreground="#2eb82e")
 
 send_button = tk.Button(app, text="Send", command=send, font=font_style, bg=button_color, fg=text_color)
 send_button.pack(pady=10, padx=10)
