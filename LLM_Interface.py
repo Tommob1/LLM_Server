@@ -20,7 +20,7 @@ def on_enter_key(event):
 
 app = tk.Tk()
 app.title("LLM Interface")
-app.geometry("400x400")
+app.geometry("1920x1080")
 
 background_color = "#333"
 text_color = "#EEE"
