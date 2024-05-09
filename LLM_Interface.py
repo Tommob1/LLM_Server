@@ -49,7 +49,7 @@ input_text = Text(app, height=3, width=50, font=font_style, bg=background_color,
 input_text.pack(pady=10, padx=10)
 input_text.bind("<Return>", on_enter_key)
 
-output_text = Text(app, height=15, width=50, font=font_style, bg=background_color, fg=text_color, wrap=tk.WORD,
+output_text = Text(app, height=40, width=100, font=font_style, bg=background_color, fg=text_color, wrap=tk.WORD,
                    borderwidth=1, relief="solid", highlightbackground=border_color, highlightthickness=1)
 output_text.pack(pady=10, padx=10)
 output_text.configure(state='disabled')
