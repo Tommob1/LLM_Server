@@ -29,6 +29,12 @@ border_color = "#555"
 font_style = ("Consolas", 12)
 app.configure(bg=background_color)
 
+info_text = Text(app, height=40, width=30, font=font_style, bg=background_color, fg=text_color, wrap=tk.WORD,
+                 borderwidth=1, relief="solid", highlightbackground=border_color, highlightthickness=1)
+info_text.insert(tk.END, "AI Model Information:\n- Model Type: GPT-4\n- Developer: OpenAI\n- Use Case: Conversational AI")
+info_text.configure(state='disabled')
+info_text.pack(side='right', fill='y', padx=10, pady=10)
+
 ascii_art = r"""
 ░▒▓███████▓▒░░▒▓████████▓▒░▒▓███████▓▒░░▒▓█▓▒░      ░▒▓█▓▒░░▒▓██████▓▒░ ░▒▓██████▓▒░░▒▓███████▓▒░▒▓████████▓▒░
 ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░    
@@ -49,7 +55,7 @@ input_text = Text(app, height=3, width=50, font=font_style, bg=background_color,
 input_text.pack(pady=10, padx=10)
 input_text.bind("<Return>", on_enter_key)
 
-output_text = Text(app, height=40, width=100, font=font_style, bg=background_color, fg=text_color, wrap=tk.WORD,
+output_text = Text(app, height=45, width=100, font=font_style, bg=background_color, fg=text_color, wrap=tk.WORD,
                    borderwidth=1, relief="solid", highlightbackground=border_color, highlightthickness=1)
 output_text.pack(pady=10, padx=10)
 output_text.configure(state='disabled')
