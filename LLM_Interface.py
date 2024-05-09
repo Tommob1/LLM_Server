@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import Text, messagebox
+from tkinter import Text, messagebox, PhotoImage
 from LLM_Server_Access import query_server
 
 def send():
@@ -8,7 +8,7 @@ def send():
         response = query_server(user_input)
         output_text.configure(state='normal')
         output_text.insert(tk.END, f"USER: {user_input}\n", 'user_text')
-        output_text.insert(tk.END, f"AI: {response}\n\n", 'green_text')
+        output_text.insert(tk.END, f"AI: {response}\n\n", '#00ff00')
         output_text.configure(state='disabled')
         input_text.delete("1.0", tk.END)
     else:
@@ -22,11 +22,11 @@ app = tk.Tk()
 app.title("LLM Interface")
 app.geometry("1920x1080")
 
-background_color = "#333"
-text_color = "#EEE"
-button_color = "#555"
-border_color = "#444"
-font_style = ("Arial", 12)
+background_color = "#1a1a1a"  # Dark background
+text_color = "#00ff00"  # Bright green text
+button_color = "#333333"
+border_color = "#555"
+font_style = ("Consolas", 12)  # Tech-styled font
 app.configure(bg=background_color)
 
 input_text = Text(app, height=3, width=50, font=font_style, bg=background_color, fg=text_color, wrap=tk.WORD,
@@ -39,10 +39,11 @@ output_text = Text(app, height=15, width=50, font=font_style, bg=background_colo
 output_text.pack(pady=10, padx=10)
 output_text.configure(state='disabled')
 
-output_text.tag_config('user_text', foreground="#FF0000")
-output_text.tag_config('green_text', foreground="#2eb82e")
+output_text.tag_config('user_text', foreground="#FF0000")  # Red for user text
+output_text.tag_config('green_text', foreground="#2eb82e")  # Bright green for AI response
 
-send_button = tk.Button(app, text="Send", command=send, font=font_style, bg=button_color, fg=text_color)
+# Replace text button with an icon
+send_button = tk.Button(app, text="SEND", command=send, font=("Consolas", 12, 'bold'), bg=button_color, fg="#00ff00")
 send_button.pack(pady=10, padx=10)
 
 app.mainloop()
