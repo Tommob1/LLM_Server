@@ -11,6 +11,11 @@ def send():
         output_text.insert(tk.END, f"AI: {response}\n\n", '#00ff00')
         output_text.configure(state='disabled')
         input_text.delete("1.0", tk.END)
+
+        info_text2.configure(state='normal')
+        info_text2.insert(tk.END, f"Latest Query: {user_input[:30]}... (truncated)\n")
+        info_text2.insert(tk.END, f"Response Length: {len(response)} characters\n\n")
+        info_text2.configure(state='disabled')
     else:
         messagebox.showinfo("Info", "Please enter some text to send.")
 
@@ -37,7 +42,7 @@ info_text.pack(side='right', fill='y', padx=0, pady=0)
 
 info_text2 = Text(app, height=40, width=30, font=font_style, bg=background_color, fg=text_color, wrap=tk.WORD,
                  borderwidth=1, relief="solid", highlightbackground=border_color, highlightthickness=1)
-info_text2.insert(tk.END, "Model Instructions:\n\nYou are a helpful AI assistant named NEURON.\nYou live in my macbook in the LMStudio platform.")
+info_text2.insert(tk.END, "Model Updates\n\n")
 info_text2.configure(state='disabled')
 info_text2.pack(side='left', fill='y', padx=0, pady=0)
 
