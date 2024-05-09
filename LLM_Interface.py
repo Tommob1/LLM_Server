@@ -22,12 +22,14 @@ app = tk.Tk()
 app.title("LLM Interface")
 app.geometry("1920x1080")
 
-background_color = "#1a1a1a"  # Dark background
-text_color = "#00ff00"  # Bright green text
+background_color = "#1a1a1a"
+text_color = "#00ff00"
 button_color = "#333333"
 border_color = "#555"
-font_style = ("Consolas", 12)  # Tech-styled font
+font_style = ("Consolas", 12)
 app.configure(bg=background_color)
+
+title = Text()
 
 input_text = Text(app, height=3, width=50, font=font_style, bg=background_color, fg=text_color, wrap=tk.WORD,
                   borderwidth=1, relief="solid", highlightbackground=border_color, highlightthickness=1)
@@ -39,10 +41,9 @@ output_text = Text(app, height=15, width=50, font=font_style, bg=background_colo
 output_text.pack(pady=10, padx=10)
 output_text.configure(state='disabled')
 
-output_text.tag_config('user_text', foreground="#FF0000")  # Red for user text
-output_text.tag_config('green_text', foreground="#2eb82e")  # Bright green for AI response
+output_text.tag_config('user_text', foreground="#FF0000")
+output_text.tag_config('green_text', foreground="#2eb82e")
 
-# Replace text button with an icon
 send_button = tk.Button(app, text="SEND", command=send, font=("Consolas", 12, 'bold'), bg=button_color, fg="#00ff00")
 send_button.pack(pady=10, padx=10)
 
