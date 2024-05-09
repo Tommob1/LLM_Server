@@ -37,9 +37,10 @@ title_label = tk.Label(app, text="""░▒▓███████▓▒░░�
 ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░      ░▒▓█▓▒░      ░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░     
 ░▒▓█▓▒░░▒▓█▓▒░▒▓████████▓▒░▒▓█▓▒░      ░▒▓████████▓▒░▒▓█▓▒░░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░     
                                                                                                                
-                                                                                                              
-""", font=("Consolas", 24), bg=background_color, fg=text_color, wrap=tk.WORD, 
-borderwidth=1, relief="solid", highlightbackground=border_color, highlightthickness=1)
+                                                                                                               
+""", font=("Consolas", 10), bg=background_color, fg=text_color)
+title_label.pack(pady=(10,0), padx=10)
+
 
 input_text = Text(app, height=3, width=50, font=font_style, bg=background_color, fg=text_color, wrap=tk.WORD,
                   borderwidth=1, relief="solid", highlightbackground=border_color, highlightthickness=1)
