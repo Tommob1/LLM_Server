@@ -42,8 +42,8 @@ ascii_art = r"""
                                                                                                                
 """
 
-title_label = tk.Label(app, text=ascii_art, font=("Consolas", 10), bg=background_color, fg=text_color)
-title_label.pack(pady=(10,0), padx=10)
+title_label = tk.Label(app, text=ascii_art, font=("Courier New", 10), bg=background_color, fg=text_color, anchor="w")
+title_label.pack(fill='x', padx=10, pady=10)
 
 input_text = Text(app, height=3, width=50, font=font_style, bg=background_color, fg=text_color, wrap=tk.WORD,
                   borderwidth=1, relief="solid", highlightbackground=border_color, highlightthickness=1)
