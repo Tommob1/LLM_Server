@@ -8,7 +8,7 @@ def send():
         response = query_server(user_input)
         output_text.configure(state='normal')
         output_text.insert(tk.END, f"USER: {user_input}\n", 'user_text')
-        output_text.insert(tk.END, f"AI: {response}\n\n", 'green_text')
+        output_text.insert(tk.END, f"AI: {response}\n\n", '#00ff00')
         output_text.configure(state='disabled')
         input_text.delete("1.0", tk.END)
     else:
@@ -22,14 +22,13 @@ app = tk.Tk()
 app.title("LLM Interface")
 app.geometry("1920x1080")
 
-background_color = "#1a1a1a"
+background_color = "#000000"
 text_color = "#00ff00"
 button_color = "#333333"
 border_color = "#555"
 font_style = ("Consolas", 12)
 app.configure(bg=background_color)
 
-# Define ASCII Art as a raw string
 ascii_art = r"""
 ░▒▓███████▓▒░░▒▓████████▓▒░▒▓███████▓▒░░▒▓█▓▒░      ░▒▓█▓▒░░▒▓██████▓▒░ ░▒▓██████▓▒░░▒▓███████▓▒░▒▓████████▓▒░
 ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░    
