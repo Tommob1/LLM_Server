@@ -25,10 +25,14 @@ def on_enter_key(event):
 def load_text_character_by_character(widget, text, index=0, delay=50):
     """ Helper function to load text into a widget character by character with a delay. """
     if index < len(text):
-        widget.configure(state='normal')
-        widget.insert(tk.END, text[index])
-        widget.configure(state='disabled')
-        widget.see(tk.END)
+        if isinstance(widget, tk.Text):
+            widget.configure(state='normal')
+            widget.insert(tk.END, text[index])
+            widget.configure(state='disabled')
+        elif isinstance(widget, tk.Label):
+            current_text = widget.cget("text")
+            widget.configure(text=current_text + text[index])
+        widget.see(tk.END) if isinstance(widget, tk.Text) else None
         widget.after(delay, lambda: load_text_character_by_character(widget, text, index + 1, delay))
 
 def update_info_text2(text):
