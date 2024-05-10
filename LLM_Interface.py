@@ -108,18 +108,18 @@ def perform_server_check():
         update_status("ONLINE")
 
 def update_status(status):
-    status_value_label.config(text=status)  # Update the text
+    status_value_label.config(text=status)
     if status == "TESTING":
-        status_value_label.config(fg='blue')  # Use blue for TESTING
+        status_value_label.config(fg='blue')
     elif status == "ONLINE":
-        status_value_label.config(fg='green')  # Use green for ONLINE
+        status_value_label.config(fg='#00ff00')
     elif status == "OFFLINE":
-        status_value_label.config(fg='red')  # Use red for OFFLINE
+        status_value_label.config(fg='red')
 
-status_label = Label(app, text="Status:", font=("Consolas", 12), bg="#000000", fg="#FFFFFF")
+status_label = Label(app, text="AI STATUS:", font=("Consolas", 15), bg="#000000", fg="#00ff00")
 status_label.pack(side='left', padx=(10, 2))
 
-status_value_label = Label(app, text="Initializing...", font=("Consolas", 12), bg="#000000", fg="#FFFFFF")
+status_value_label = Label(app, text="INITIALIZING...", font=("Consolas", 15), bg="#000000", fg="#00ff00")
 status_value_label.pack(side='left', padx=(2, 10))
 
 app.after(500, lambda: load_text_character_by_character(info_text2, "Model Updates:\n\n", 0, 20))
