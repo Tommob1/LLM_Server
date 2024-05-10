@@ -4,9 +4,8 @@ from LLM_Server_Access import query_server
 from logo import ascii_art
 
 def send_test_message():
-    # Update status to TESTING
     update_status("TESTING")
-    response = query_server("hello")  # Send a test message to the server
+    response = query_server("hello")
     if "Error" in response:
         update_status("OFFLINE")
     else:
