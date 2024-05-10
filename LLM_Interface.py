@@ -1,7 +1,30 @@
 import tkinter as tk
-from tkinter import Text, messagebox, PhotoImage
+from tkinter import Text, messagebox
 from LLM_Server_Access import query_server
 from logo import ascii_art
+
+def send_test_message():
+    # Update status to TESTING
+    update_status("TESTING")
+    response = query_server("hello")  # Send a test message to the server
+    if "Error" in response:
+        update_status("OFFLINE")
+    else:
+        update_status("ONLINE")
+
+def update_status(status):
+    """ Updates the info_text widget with the server status. """
+    info_text.configure(state='normal')
+    if status == "TESTING":
+        info_text.delete("1.0", tk.END)
+        info_text.insert(tk.END, "Status: TESTING\n", 'status_text')
+    elif status == "ONLINE":
+        info_text.delete("1.0", tk.END)
+        info_text.insert(tk.END, "Status: ONLINE\n", 'status_text')
+    elif status == "OFFLINE":
+        info_text.delete("1.0", tk.END)
+        info_text.insert(tk.END, "Status: OFFLINE\n", 'error_text')
+    info_text.configure(state='disabled')
 
 def send():
     user_input = input_text.get("1.0", tk.END).strip()
@@ -73,9 +96,33 @@ output_text = Text(app, height=45, width=100, font=font_style, bg=background_col
 output_text.pack(pady=10, padx=10)
 output_text.configure(state='disabled')
 
+def send_test_message():
+    # Update status to TESTING
+    update_status("TESTING")
+    response = query_server("hello")  # Send a test message to the server
+    if "Error" in response:
+        update_status("OFFLINE")
+    else:
+        update_status("ONLINE")
+
+def update_status(status):
+    """ Updates the info_text widget with the server status. """
+    info_text2.configure(state='normal')
+    if status == "TESTING":
+        info_text2.delete("1.0", tk.END)
+        info_text2.insert(tk.END, "\nStatus: TESTING\n", 'status_text')
+    elif status == "ONLINE":
+        info_text2.delete("1.0", tk.END)
+        info_text2.insert(tk.END, "\nStatus: ONLINE\n", 'status_text')
+    elif status == "OFFLINE":
+        info_text2.delete("1.0", tk.END)
+        info_text2.insert(tk.END, "\nStatus: OFFLINE\n", 'error_text')
+    info_text2.configure(state='disabled')
+
 app.after(500, lambda: load_text_character_by_character(info_text2, "Model Updates:\n\n", 0, 20))
 app.after(1500, lambda: load_text_character_by_character(info_text,"""AI MODEL INFORMATION:\n\nModel Type: \nMistral Instruct \n(v0 1 7B Q4_0 gguf)\n\nDeveloper: \nMistral AI\n\nAI Name: \nNEURON\n\nModel Instructions:
 'You are a helpful AI assistant named NEURON.\nYou live in my macbook in the LMStudio platform.'\n""", 0, 20))
 app.after(2000, lambda: load_text_character_by_character(title_label, ascii_art, 0, 1))
+app.after(2000, send_test_message)
 
 app.mainloop()
