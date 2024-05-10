@@ -23,7 +23,6 @@ def on_enter_key(event):
     return 'break'
 
 def load_text_character_by_character(widget, text, index=0, delay=50):
-    """ Helper function to load text into a widget character by character with a delay. """
     if index < len(text):
         if isinstance(widget, tk.Text):
             widget.configure(state='normal')
@@ -42,7 +41,7 @@ def update_info_text2(text):
     info_text2.configure(state='disabled')
 
 app = tk.Tk()
-app.title("LLM Interface")
+app.title("NEURON Interface")
 app.geometry("1920x1080")
 
 background_color = "#000000"
@@ -74,9 +73,9 @@ output_text = Text(app, height=45, width=100, font=font_style, bg=background_col
 output_text.pack(pady=10, padx=10)
 output_text.configure(state='disabled')
 
-app.after(500, lambda: load_text_character_by_character(info_text2, "Model Updates:\n\n", 0, 10))
+app.after(500, lambda: load_text_character_by_character(info_text2, "Model Updates:\n\n", 0, 20))
 app.after(1500, lambda: load_text_character_by_character(info_text,"""AI MODEL INFORMATION:\n\nModel Type: \nMistral Instruct \n(v0 1 7B Q4_0 gguf)\n\nDeveloper: \nMistral AI\n\nAI Name: \nNEURON\n\nModel Instructions:
-'You are a helpful AI assistant named NEURON.\nYou live in my macbook in the LMStudio platform.'\n""", 0, 10))
+'You are a helpful AI assistant named NEURON.\nYou live in my macbook in the LMStudio platform.'\n""", 0, 20))
 app.after(2000, lambda: load_text_character_by_character(title_label, ascii_art, 0, 1))
 
 app.mainloop()
