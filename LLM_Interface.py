@@ -74,9 +74,9 @@ output_text = Text(app, height=45, width=100, font=font_style, bg=background_col
 output_text.pack(pady=10, padx=10)
 output_text.configure(state='disabled')
 
-app.after(500, lambda: load_text_character_by_character(info_text2, "Model Updates:\n\n", 0, 100))
+app.after(500, lambda: load_text_character_by_character(info_text2, "Model Updates:\n\n", 0, 10))
 app.after(1500, lambda: load_text_character_by_character(info_text,"""AI MODEL INFORMATION:\n\nModel Type: \nMistral Instruct \n(v0 1 7B Q4_0 gguf)\n\nDeveloper: \nMistral AI\n\nAI Name: \nNEURON\n\nModel Instructions:
-'You are a helpful AI assistant named NEURON.\nYou live in my macbook in the LMStudio platform.'\n""", 0, 100))
-app.after(2000, lambda: load_text_character_by_character(title_label, ascii_art, 0, 50))
+'You are a helpful AI assistant named NEURON.\nYou live in my macbook in the LMStudio platform.'\n""", 0, 10))
+app.after(2000, lambda: load_text_character_by_character(title_label, ascii_art, 0, 1))
 
 app.mainloop()
