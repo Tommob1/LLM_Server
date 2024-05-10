@@ -14,17 +14,28 @@ def send():
         output_text.configure(state='disabled')
         input_text.delete("1.0", tk.END)
 
-        info_text2.configure(state='normal')
-        info_text2.insert(tk.END, f"Latest Query: {user_input[:30]}... (truncated)\n")
-        info_text2.insert(tk.END, f"Response Length: {len(response)} characters\n\n")
-        info_text2.see(tk.END)
-        info_text2.configure(state='disabled')
+        update_info_text2(f"Latest Query: {user_input[:30]}... (truncated)\nResponse Length: {len(response)} characters\n\n")
     else:
         messagebox.showinfo("Info", "Please enter some text to send.")
 
 def on_enter_key(event):
     send()
     return 'break'
+
+def load_text_character_by_character(widget, text, index=0, delay=50):
+    """ Helper function to load text into a widget character by character with a delay. """
+    if index < len(text):
+        widget.configure(state='normal')
+        widget.insert(tk.END, text[index])
+        widget.configure(state='disabled')
+        widget.see(tk.END)
+        widget.after(delay, lambda: load_text_character_by_character(widget, text, index + 1, delay))
+
+def update_info_text2(text):
+    info_text2.configure(state='normal')
+    info_text2.insert(tk.END, text)
+    info_text2.see(tk.END)
+    info_text2.configure(state='disabled')
 
 app = tk.Tk()
 app.title("LLM Interface")
@@ -38,19 +49,15 @@ font_style = ("Consolas", 12)
 app.configure(bg=background_color)
 print(ascii_art)
 
-info_text = Text(app, height=40, width=30, font=font_style, bg=background_color, fg=text_color, wrap=tk.WORD,
-                 borderwidth=1, relief="solid", highlightbackground=border_color, highlightthickness=1)
-info_text.insert(tk.END, "AI MODEL INFORMATION:\n\nModel Type: \nMistral Instruct \n(v0 1 7B Q4_0 gguf)\n\nDeveloper: \nMistral AI\n\nAI Name: \nNEURON\n\nModel Instructions:\n'You are a helpful AI assistant named NEURON.\nYou live in my macbook in the LMStudio platform.'\n")
-info_text.configure(state='disabled')
-info_text.pack(side='right', fill='y', padx=0, pady=0)
-
 info_text2 = Text(app, height=40, width=30, font=font_style, bg=background_color, fg=text_color, wrap=tk.WORD,
-                 borderwidth=1, relief="solid", highlightbackground=border_color, highlightthickness=1)
-info_text2.insert(tk.END, "Model Updates:\n\n")
-info_text2.configure(state='disabled')
+                  borderwidth=1, relief="solid", highlightbackground=border_color, highlightthickness=1)
 info_text2.pack(side='left', fill='y', padx=0, pady=0)
 
-title_label = tk.Label(app, text=ascii_art, font=("Courier New", 10), bg=background_color, fg=text_color, anchor='center', justify='center')
+info_text = Text(app, height=40, width=30, font=font_style, bg=background_color, fg=text_color, wrap=tk.WORD,
+                 borderwidth=1, relief="solid", highlightbackground=border_color, highlightthickness=1)
+info_text.pack(side='right', fill='y', padx=0, pady=0)
+
+title_label = tk.Label(app, font=("Courier New", 10), bg=background_color, fg=text_color, anchor='center', justify='center')
 title_label.pack(fill='x', padx=10, pady=10)
 
 input_text = Text(app, height=3, width=50, font=font_style, bg=background_color, fg=text_color, wrap=tk.WORD,
@@ -63,7 +70,9 @@ output_text = Text(app, height=45, width=100, font=font_style, bg=background_col
 output_text.pack(pady=10, padx=10)
 output_text.configure(state='disabled')
 
-output_text.tag_config('user_text', foreground="#FF0000")
-output_text.tag_config('green_text', foreground="#2eb82e")
+app.after(500, lambda: load_text_character_by_character(info_text2, "Model Updates:\n\n", 0, 100))
+app.after(1500, lambda: load_text_character_by_character(info_text,"""AI MODEL INFORMATION:\n\nModel Type: \nMistral Instruct \n(v0 1 7B Q4_0 gguf)\n\nDeveloper: \nMistral AI\n\nAI Name: \nNEURON\n\nModel Instructions:
+'You are a helpful AI assistant named NEURON.\nYou live in my macbook in the LMStudio platform.'\n""", 0, 100))
+app.after(2000, lambda: load_text_character_by_character(title_label, ascii_art, 0, 50))
 
 app.mainloop()
