@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import Text, messagebox, PhotoImage
 from LLM_Server_Access import query_server
+from logo import ascii_art
 
 def send():
     user_input = input_text.get("1.0", tk.END).strip()
@@ -35,6 +36,7 @@ button_color = "#333333"
 border_color = "#555"
 font_style = ("Consolas", 12)
 app.configure(bg=background_color)
+print(ascii_art)
 
 info_text = Text(app, height=40, width=30, font=font_style, bg=background_color, fg=text_color, wrap=tk.WORD,
                  borderwidth=1, relief="solid", highlightbackground=border_color, highlightthickness=1)
@@ -47,17 +49,6 @@ info_text2 = Text(app, height=40, width=30, font=font_style, bg=background_color
 info_text2.insert(tk.END, "Model Updates:\n\n")
 info_text2.configure(state='disabled')
 info_text2.pack(side='left', fill='y', padx=0, pady=0)
-
-ascii_art = r"""░▒▓███████▓▒░░▒▓████████▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓███████▓▒░ ░▒▓██████▓▒░░▒▓███████▓▒░  
-░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ 
-░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ 
-░▒▓█▓▒░░▒▓█▓▒░▒▓██████▓▒░ ░▒▓█▓▒░░▒▓█▓▒░▒▓███████▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ 
-░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ 
-░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ 
-░▒▓█▓▒░░▒▓█▓▒░▒▓████████▓▒░░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░ 
-                                                                                
-                                                                                
-"""
 
 title_label = tk.Label(app, text=ascii_art, font=("Courier New", 10), bg=background_color, fg=text_color, anchor='center', justify='center')
 title_label.pack(fill='x', padx=10, pady=10)
