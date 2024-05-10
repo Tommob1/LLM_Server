@@ -9,12 +9,14 @@ def send():
         output_text.configure(state='normal')
         output_text.insert(tk.END, f"USER: {user_input}\n", 'user_text')
         output_text.insert(tk.END, f"AI: {response}\n\n", '#00ff00')
+        output_text.see(tk.END)
         output_text.configure(state='disabled')
         input_text.delete("1.0", tk.END)
 
         info_text2.configure(state='normal')
         info_text2.insert(tk.END, f"Latest Query: {user_input[:30]}... (truncated)\n")
         info_text2.insert(tk.END, f"Response Length: {len(response)} characters\n\n")
+        info_text2.see(tk.END)
         info_text2.configure(state='disabled')
     else:
         messagebox.showinfo("Info", "Please enter some text to send.")
