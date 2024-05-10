@@ -3,14 +3,6 @@ from tkinter import Text, messagebox, Label
 from LLM_Server_Access import query_server
 from logo import ascii_art
 
-def send_test_message():
-    update_status("TESTING")
-    response = query_server("hello")
-    if "Error" in response:
-        update_status("OFFLINE")
-    else:
-        update_status("ONLINE")
-
 def update_status(status):
     """ Updates the info_text widget with the server status. """
     info_text.configure(state='normal')
@@ -97,6 +89,7 @@ output_text.configure(state='disabled')
 
 def send_test_message():
     update_status("TESTING")
+    load_text_character_by_character(info_text2, "Sending test to LLM...\n\n")
     app.after(2000, perform_server_check)
 
 def perform_server_check():
