@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import Text, messagebox
+from tkinter import Text, messagebox, Label
 from LLM_Server_Access import query_server
 from logo import ascii_art
 
@@ -97,29 +97,30 @@ output_text.pack(pady=10, padx=10)
 output_text.configure(state='disabled')
 
 def send_test_message():
-    # Update status to TESTING
     update_status("TESTING")
-    # Schedule the server check to run after a pause of 2000 milliseconds (2 seconds)
     app.after(2000, perform_server_check)
 
 def perform_server_check():
-    response = query_server("hello")  # Send a test message to the server
+    response = query_server("hello")
     if "Error" in response:
         update_status("OFFLINE")
     else:
         update_status("ONLINE")
 
 def update_status(status):
-    """ Appends the server status at the end of the info_text widget. """
-    info_text.configure(state='normal')
+    status_value_label.config(text=status)  # Update the text
     if status == "TESTING":
-        info_text.insert(tk.END, "Status: TESTING\n", 'status_text')
+        status_value_label.config(fg='blue')  # Use blue for TESTING
     elif status == "ONLINE":
-        info_text.insert(tk.END, "Status: ONLINE\n", 'status_text')
+        status_value_label.config(fg='green')  # Use green for ONLINE
     elif status == "OFFLINE":
-        info_text.insert(tk.END, "Status: OFFLINE\n", 'error_text')
-    info_text.see(tk.END)  # Scroll to the end of the info_text to make sure the status is visible
-    info_text.configure(state='disabled')
+        status_value_label.config(fg='red')  # Use red for OFFLINE
+
+status_label = Label(app, text="Status:", font=("Consolas", 12), bg="#000000", fg="#FFFFFF")
+status_label.pack(side='left', padx=(10, 2))
+
+status_value_label = Label(app, text="Initializing...", font=("Consolas", 12), bg="#000000", fg="#FFFFFF")
+status_value_label.pack(side='left', padx=(2, 10))
 
 app.after(500, lambda: load_text_character_by_character(info_text2, "Model Updates:\n\n", 0, 20))
 app.after(1500, lambda: load_text_character_by_character(info_text,"""AI MODEL INFORMATION:\n\nModel Type: \nMistral Instruct \n(v0 1 7B Q4_0 gguf)\n\nDeveloper: \nMistral AI\n\nAI Name: \nNEURON\n\nModel Instructions:
