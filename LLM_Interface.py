@@ -96,10 +96,10 @@ def perform_server_check():
     response = query_server("hello")
     if "Error" in response:
         update_status("OFFLINE")
-        load_text_character_by_character(info_text2,"Model Status: OFFLINE - Test Failed\nModel Unresponsive\n")
+        load_text_character_by_character(info_text2,"Model Status: OFFLINE\n\nTest Failed\nModel Unresponsive\n")
     else:
         update_status("ONLINE")
-        load_text_character_by_character(info_text2,"Model Status: ONLINE - Test Successful\nModel Responsive\n")
+        load_text_character_by_character(info_text2,"Model Status: ONLINE\n\nTest Successful\nModel Responsive\n")
 
 def update_status(status):
     status_value_label.config(text=status)
