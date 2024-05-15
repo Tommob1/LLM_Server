@@ -4,7 +4,6 @@ from LLM_Server_Access import query_server
 from logo import ascii_art
 
 def update_status(status):
-    """ Updates the info_text widget with the server status. """
     info_text.configure(state='normal')
     if status == "TESTING":
         info_text.delete("1.0", tk.END)
