@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import Text, messagebox, Label
+from PIL import Image, ImageTk
 from LLM_Server_Access import query_server
 from logo import ascii_art
 
@@ -56,7 +57,11 @@ def update_info_text2(text):
 app = tk.Tk()
 app.title("NEURON Interface")
 app.geometry("1920x1080")
-app.attributes("-alpha", 0.8)
+
+bg_image = Image.new("RGBA", (1920, 1080), (0, 0, 0, 0))
+bg_photo = ImageTk.PhotoImage(bg_image)
+bg_label = tk.Label(app, image=bg_photo)
+bg_label.place(x=0, y=0, relwidth=1, relheight=1)
 
 background_color = "#000000"
 text_color = "#00ff00"
