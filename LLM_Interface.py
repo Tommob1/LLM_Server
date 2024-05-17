@@ -55,7 +55,7 @@ def update_info_text2(text):
 
 app = tk.Tk()
 app.title("NEURON Interface")
-app.geometry("1920x1080")
+app.geometry("1280x720")
 app.attributes("-alpha", 0.8)
 
 background_color = "#000000"
