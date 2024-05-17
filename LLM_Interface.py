@@ -82,7 +82,7 @@ input_text = Text(app, height=3, width=50, font=font_style, bg=background_color,
 input_text.pack(pady=10, padx=10)
 input_text.bind("<Return>", on_enter_key)
 
-output_text = Text(app, height=45, width=100, font=font_style, bg=background_color, fg=text_color, wrap=tk.WORD,
+output_text = Text(app, height=30, width=100, font=font_style, bg=background_color, fg=text_color, wrap=tk.WORD,
                    borderwidth=1, relief="solid", highlightbackground=border_color, highlightthickness=1)
 output_text.pack(pady=10, padx=10)
 output_text.configure(state='disabled')
@@ -111,7 +111,7 @@ def update_status(status):
         status_value_label.config(fg='red')
 
 status_label = Label(app, text="AI STATUS:", font=("Consolas", 15), bg="#000000", fg="#00ff00")
-status_label.pack(side='left', padx=(10, 2))
+status_label.pack(side='left', padx=(0, 2))
 
 status_value_label = Label(app, text="INITIALIZING...", font=("Consolas", 15), bg="#000000", fg="#00ff00")
 status_value_label.pack(side='left', padx=(2, 10))
