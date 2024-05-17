@@ -56,7 +56,7 @@ def update_info_text2(text):
 app = tk.Tk()
 app.title("NEURON Interface")
 app.geometry("1280x720")
-app.attributes("-alpha", 0.8)
+app.attributes("-alpha", 0.9)
 
 background_color = "#000000"
 text_color = "#00ff00"
@@ -104,7 +104,7 @@ def perform_server_check():
 def update_status(status):
     status_value_label.config(text=status)
     if status == "TESTING":
-        status_value_label.config(fg='blue')
+        status_value_label.config(fg='yellow')
     elif status == "ONLINE":
         status_value_label.config(fg='#00ff00')
     elif status == "OFFLINE":
