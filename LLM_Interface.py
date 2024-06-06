@@ -2,6 +2,11 @@ import tkinter as tk
 from tkinter import Text, messagebox, Label
 from LLM_Server_Access import query_server
 from Logo import ascii_art
+import requests
+
+def query_server(user_input):
+    response = requests.post('http://<your-ip-address>:5000/query', json={'query': user_input})
+    return response.json().get('response', 'Error: No response from server')
 
 def update_status(status):
     info_text.configure(state='normal')
