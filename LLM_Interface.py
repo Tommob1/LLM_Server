@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import Text, messagebox, Label
 from LLM_Server_Access import query_server
-from logo import ascii_art
+from Logo import ascii_art
 
 def update_status(status):
     info_text.configure(state='normal')
